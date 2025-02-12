@@ -1,0 +1,481 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8fcff;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* NAVBAR  */
+.navbar {
+  padding: 1rem;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-wrapper h2 {
+  color: #fff;
+}
+
+.page-logo {
+  height: 6rem;
+  border-radius: 2rem;
+}
+
+.main-nav-list,
+.auth-nav-list {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  list-style: none;
+}
+
+/* to override default styles */
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit; 
+}
+
+.nav-links {
+  margin: 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  /* color: #12aff04d; */
+  color: #fff;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-links:visited {
+  /* color: #809FB8;  */
+  color: #fff; 
+}
+/* MODAL  */
+/* Modal Overlay */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal Content */
+.modal-content {
+  width: 400px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* REGISTER FORM  */
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Close Button */
+.button-wrapper .close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  margin-bottom: 0;
+}
+
+.button-wrapper .close-btn:hover {
+  background: none;
+}
+
+.register-form {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.register-form .button-wrapper {
+  margin-bottom: 0;
+} 
+.register-form div {
+  margin-bottom: 15px;
+}
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.register-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.register-form button:hover {
+  background-color: #0072ec;
+}
+
+/* LOGIN FORM */
+.login-form {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.login-form .button-wrapper {
+  margin-bottom: 0;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-form div {
+  margin-bottom: 15px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.login-form button:hover {
+  background-color: #0072ec;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+/* VIDEO BACKGROUND  */
+.home-container {
+  width: 100%;
+  height: 91.5vh;
+  overflow: hidden;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1; 
+}
+
+.video-background video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.heading {
+  position: relative;
+  z-index: 1; 
+  text-align: center;
+  color: white;
+  padding: 10vh 10%;
+}
+/* FLIGHT INFO  */
+.flight-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: -10rem 0 2rem 0;
+  padding: 0 2rem;
+}
+
+.flight-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 400px;
+  width: px;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.flight-info-heading{
+ width: 100%;
+}
+
+/* PIECHARRT  */
+.chart-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  position: relative;
+}
+
+.chart-container {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.chart-text p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.chart-text span {
+  font-size: 14px;
+  color: gray;
+}
+
+.data-legend {
+  display: flex;
+  gap: 5px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f8fcff;
+  padding: 5px 10px;
+  border-radius: 9px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.blue {
+  background-color: #007fff;
+}
+
+.green {
+  background-color: #00cc99;
+}
+
+.yellow {
+  background-color: #ffbf00;
+}
+
+
+/* FLIGHT METRICS  */
+.fourth-heading {
+  margin: 0 0 -1rem 2rem;
+  color: #acacac;
+  text-align: left;
+}
+
+.flight-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 0 2rem;
+}
+
+.flight-metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.flight-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 0 2rem;
+}
+
+.flight-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.card-heading h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Subheadings: Aligning to left and right */
+.card-sub-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+
+.card-sub-heading .left {
+  text-align: left;
+}
+
+.card-sub-heading .right {
+  text-align: right;
+}
+
+/* List Items */
+.list-items {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.item .airline-logo img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.item p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.item span {
+  font-weight: bold;
+  color: #333;
+}
+
+.section-revenue {
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.flight-hours {
+  background-color: #fff;
+  border-radius: 9px;
+  padding: 2rem;
+  height: 500px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
