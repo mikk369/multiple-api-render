@@ -10,17 +10,10 @@ $router = new Router();
 $router->get('/flights', function() {
     $flightsController = new FlightsController();
     $flights =  $flightsController->getLiveFlights();
+
+    header('Content-Type: application/json');
     echo json_encode($flights);
 });
 
-// Get the current URI and HTTP method
-$uri = strtok($_SERVER['REQUEST_URI'], '?');
-$method = $_SERVER['REQUEST_METHOD'];
-
-// Resolve the route
-$action = $router->resolve($uri, $method);
-if ($action) {
-    call_user_func($action);  
-} else {
-    echo json_encode(['error' => 'Route not found']); 
-}
+// Handle request
+$router->handleRequest();
