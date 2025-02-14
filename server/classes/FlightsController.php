@@ -6,7 +6,7 @@ class FlightsController {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET");
         
-        $url = 'https://api.aviationstack.com/v1/flights?access_key=68dd230c04366941f220d3bfa79712eb&limit=10';
+        $url = 'https://api.aviationstack.com/v1/flights?access_key=68dd230c04366941f220d3bfa79712eb';
         $response = file_get_contents($url);
         $data = json_decode($response, true);
     
