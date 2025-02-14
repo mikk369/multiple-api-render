@@ -1,10 +1,37 @@
 import './App.css';
+import {useState, useEffect} from 'react';
 import NavBar from './NavBar';
 import RevenueChart from './RevenueChart';
-import PieChartComponent from './PieChartComponent';
-import { aircraftStatus, onTimePerformance, totalAirlines, co2Stats } from './data';
+import FlightInfoGrid from './FlightInfoGrid';
+import FlightMetrics from './FlightMetrics';
+import axios from 'axios';
+
+type filteredAircraftData = {
+  pagination: {
+    count: number
+  }
+    data: {
+      id: string,
+      plane_status: string
+    }[];
+}
 
 function Home() {
+  const [filteredAircraftData, setFilteredAircraftData] = useState<filteredAircraftData | null>(null);
+
+  const getFilteredAircraftData = async (): Promise<void> => {
+    try {
+      const response = await axios.get('http://localhost:8000/filteredAircraftData');
+      setFilteredAircraftData(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getFilteredAircraftData();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -25,67 +52,16 @@ function Home() {
       </div>
     </div>
       <div className="flights-section">
-        <div id='flight-info-grid' className="flight-info-grid">
-          <div className="flight-info">
-            <div className="flight-info-heading">
-              <h2>Aircrafts</h2>
-            </div>
-            <div className="chart-wrapper">
-              <PieChartComponent value={aircraftStatus.totalAircrafts.toLocaleString()}
-              label='Aircrafts'
-              data={aircraftStatus}
-              legendType="aircraft"/>
-            </div>
-          </div>
-          <div className="flight-info">
-            <div className="flight-info-heading">
-              <h2>On Time Performance</h2>
-            </div>
-            <div className="chart-wrapper">
-              <PieChartComponent value={onTimePerformance.totalDepartures} label='Departures'
-              data={onTimePerformance}
-              legendType="performance"/>
-            </div>
-          </div>
-          <div className="flight-info">
-            <div className="flight-info-heading"> 
-              <h2>Total Airlines</h2>
-            </div>
-            <div className="chart-wrapper">
-              <PieChartComponent value={totalAirlines.totalAirlines} label='Airlines'
-              data={totalAirlines}
-              legendType="totalAirlines"/>
-            </div>
-          </div>
-          <div className="flight-info">
-            <div className="flight-info-heading">
-              <h2>CO2 Emissions</h2>
-            </div>
-            <div className="chart-wrapper">
-              <PieChartComponent value={co2Stats.totalEmissions.toLocaleString()} label='Tons CO₂'
-              data={co2Stats}
-              legendType="emissions"/>
-            </div>
-          </div>
-        </div>
-          <p className='fourth-heading'>metrics</p>
-        <div className="flight-metrics-grid">
-          <div className="flight-metric">
-            <p>Total Flights</p>
-            <h2>75,030</h2>
-            <span>+12,7% vs last month</span>
-          </div>
-          <div className="flight-metric">
-            <p>Flight Hours</p>
-            <h2>93,000</h2>
-            <span>-12,7% vs last month</span>
-          </div>
-          <div className="flight-metric">
-            <p>Distance Flown</p>
-            <h2>59,023</h2>
-            <span>+12,7% vs last month</span>
-          </div>
-        </div>
+        {filteredAircraftData ? (
+
+          <FlightInfoGrid
+          filteredAircraftData={filteredAircraftData}
+          />
+        ) : (
+          <p>API requests are full</p>
+        )}
+        <p className='fourth-heading'>metrics</p>
+        <FlightMetrics />
         <div className="flight-detail-grid">
           <div className="flight-detail">
             <div className="card-heading">

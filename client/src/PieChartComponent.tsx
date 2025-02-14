@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const LEGENDCOLORS: { [key: string]: string } = {
   scheduled: '#0088FE',
@@ -38,7 +38,7 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
         legendItems = [
           { label: 'Scheduled', value: data.scheduled, color: LEGENDCOLORS.scheduled},
           { label: 'Active', value: data.active, color: LEGENDCOLORS.active},
-          { label: 'Landed', value: data.landed, color: LEGENDCOLORS.landed },
+          { label: 'Inactive', value: data.landed, color: LEGENDCOLORS.landed },
         ];
         break;
       case 'performance':
@@ -55,7 +55,7 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
           { label: 'InActive', value: data.inactiveAirlines, color: LEGENDCOLORS.canceled},
         ];
         break;
-      case 'emissions':
+      case 'airports':
         legendItems = [
           { label: 'Total', value: data.totalEmissions, color: LEGENDCOLORS.scheduled},
           { label: 'Average', value: data.averageEmissionsPerFlight, color: LEGENDCOLORS.active},
@@ -97,6 +97,7 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
+          <Tooltip/>
         </PieChart>
         {/* Text elements inside the chart */}
         <div className="chart-text">

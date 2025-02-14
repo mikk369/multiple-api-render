@@ -3,6 +3,7 @@
 require_once __DIR__ . './routes/Router.php';
 require_once __DIR__ . './classes/FlightsController.php';
 require_once __DIR__ . './classes/WeatherController.php';
+require_once __DIR__ . './classes/AircraftsController.php';
 
 //initialize the router
 $router = new Router();
@@ -22,6 +23,14 @@ $router->get('/weather', function() {
 
     header('Content-Type: application/json');
     echo json_encode($weather);
+});
+
+$router->get('/filteredAircraftData', function() {
+    $filteredAircraftData = new filteredAircraft();
+    $filteredAircraft = $filteredAircraftData->filterAircraftData();
+
+    header('Content-Type: application/json');
+    echo json_encode($filteredAircraft);
 });
 
 // Handle request
