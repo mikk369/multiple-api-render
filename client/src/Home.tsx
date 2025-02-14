@@ -58,7 +58,7 @@ function Home() {
           filteredAircraftData={filteredAircraftData}
           />
         ) : (
-          <p>API requests are full</p>
+          <p className='api-message'>API requests are full</p>
         )}
         <p className='fourth-heading'>metrics</p>
         <FlightMetrics />

@@ -295,6 +295,10 @@ a:-webkit-any-link {
 .flight-info-heading{
  width: 100%;
 }
+.api-message {
+ padding: 2rem;
+ color: orangered;
+}
 
 /* PIECHARRT  */
 .chart-wrapper {
