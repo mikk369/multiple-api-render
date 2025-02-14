@@ -52,7 +52,7 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
         legendItems = [
           { label: 'Airlines', value: data.totalAirlines, color: LEGENDCOLORS.scheduled},
           { label: 'Active', value: data.activeAirlines, color: LEGENDCOLORS.active},
-          { label: 'InActive', value: data.inactiveAirlines, color: LEGENDCOLORS.canceled},
+          { label: 'Inactive', value: data.inactiveAirlines, color: LEGENDCOLORS.canceled},
         ];
         break;
       case 'airports':
@@ -97,7 +97,7 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip/>
+            <Tooltip wrapperStyle={{ transform: "translate(80px, -40px)"  }}/>
         </PieChart>
         {/* Text elements inside the chart */}
         <div className="chart-text">
