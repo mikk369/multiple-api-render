@@ -3,7 +3,7 @@ import axios from 'axios';
 import NavBar from './NavBar';
 
 interface LoginModalProps {
-    onClose: () => void;
+    onClose?: () => void;
   }
 
 const LoginForm = ({onClose} : LoginModalProps) => {

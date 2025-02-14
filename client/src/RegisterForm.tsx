@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 interface RegisterFormProps {
-    onClose: () => void;
+    onClose?: () => void;
   }
 
 const RegisterForm = ({onClose}: RegisterFormProps) => {
