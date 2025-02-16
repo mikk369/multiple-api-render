@@ -16,8 +16,15 @@ type filteredAircraftData = {
     }[];
 }
 
+type filteredFlightsData = {
+  totalFlights: number,
+  delayedFlights: number,
+  onTimeFlights: number
+}
+
 function Home() {
   const [filteredAircraftData, setFilteredAircraftData] = useState<filteredAircraftData | null>(null);
+  const [filteredFlightsData, setFilteredFlightsData] = useState<filteredFlightsData | null>(null);
 
   const getFilteredAircraftData = async (): Promise<void> => {
     try {
@@ -28,8 +35,18 @@ function Home() {
     }
   }
 
+  const getFilteredFlightsData = async (): Promise<void> => {
+    try {
+      const response = await axios.get('http://localhost:8000/filteredFlights');
+      setFilteredFlightsData(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     getFilteredAircraftData();
+    getFilteredFlightsData();
   }, []);
 
   return (
@@ -52,10 +69,11 @@ function Home() {
       </div>
     </div>
       <div className="flights-section">
-        {filteredAircraftData ? (
+        {filteredAircraftData && filteredFlightsData ? (
 
           <FlightInfoGrid
           filteredAircraftData={filteredAircraftData}
+          filteredFlightsData={filteredFlightsData}
           />
         ) : (
           <p className='api-message'>API requests are full</p>

@@ -21,18 +21,24 @@ class FlightFilter {
         $this->FlightsController = new FlightsController();
     }
 
-    public function getFilteredFlights($airlineFilter) {
+    public function getFilteredFlights() {
         $flights = $this->FlightsController->getLiveFlights();
-        $filteredFlights = [];
-        if(isset($flights['data']) && is_array($flights['data'])) {
-            foreach ($flights['data'] as $flight) {
-                if (isset($flight['airline']['name']) && $flight['airline']['name'] === $airlineFilter) {
-                    $filteredFlights[] = $flight;
-                } 
-            }
-        } else {
-            echo "No flight data available";
-        }
+        $totalFlights = $flights['pagination']['count'] ?? 0;
+
+        $delayedFlights = array_filter($flights['data'] ?? [], function($flight) {
+            return isset($flight['departure']['delay']) && $flight['departure']['delay'] > 0;
+        });
+
+        $delayedFlightsInt = count($delayedFlights);
+
+        $onTimeFlights = $totalFlights - $delayedFlightsInt; 
+
+        $filteredFlights = [
+            'totalFlights' => $totalFlights,
+            'delayedFlights' => $delayedFlightsInt,
+            'onTimeFlights' => $onTimeFlights
+        ];
+
         return $filteredFlights;
     }
 }

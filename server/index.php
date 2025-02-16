@@ -32,6 +32,13 @@ $router->get('/filteredAircraftData', function() {
     header('Content-Type: application/json');
     echo json_encode($filteredAircraft);
 });
+$router->get('/filteredFlights', function() {
+    $filteredFlightData = new FlightFilter();
+    $filteredFlight = $filteredFlightData->getFilteredFlights();
+
+    header('Content-Type: application/json');
+    echo json_encode($filteredFlight);
+});
 
 // Handle request
 $router->handleRequest();

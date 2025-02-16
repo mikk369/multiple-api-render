@@ -11,11 +11,18 @@ type FilteredAircraftData = {
   }[];
 };
 
+type filteredFlightsData = {
+  totalFlights: number,
+  delayedFlights: number,
+  onTimeFlights: number
+}
+
 type FlightInfoGridProps = {
-  filteredAircraftData: FilteredAircraftData;
+  filteredAircraftData: FilteredAircraftData,
+  filteredFlightsData: filteredFlightsData
 };
 
-function FlightInfoGrid({ filteredAircraftData }: FlightInfoGridProps)  {
+function FlightInfoGrid({ filteredAircraftData, filteredFlightsData }: FlightInfoGridProps)  {
 
   const transformDataForPieChart = (data: { id: string; plane_status: string }[], count: number) => {
     let totalActive = 0;
@@ -58,8 +65,8 @@ function FlightInfoGrid({ filteredAircraftData }: FlightInfoGridProps)  {
               <h2>On Time Performance</h2>
             </div>
             <div className="chart-wrapper">
-              <PieChartComponent value={onTimePerformance.totalDepartures} label='Departures'
-              data={onTimePerformance}
+              <PieChartComponent value={filteredFlightsData.totalFlights} label='Departures'
+              data={filteredFlightsData}
               legendType="performance"/>
             </div>
           </div>

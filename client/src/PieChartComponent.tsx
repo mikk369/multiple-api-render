@@ -2,24 +2,34 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const LEGENDCOLORS: { [key: string]: string } = {
   scheduled: '#0088FE',
+  totalFlights: '#0088FE',
   totalEmissions: '#0088FE',
   onTime: '#0088FE',
   totalAirlines: '#0088FE',
   performance: '#0088FE',
   active: '#00C49F',
+  onTimeFlights: '#00C49F',
   averageEmissionsPerFlight: '#00C49F',
   activeAirlines: '#00C49F',
   landed: '#FFBB28',
   delayed: '#FF8042',
+  delayedFlights: '#FF8042',
   canceled: '#FF4D4D',
   globalAnnualEmissions: '#FFBB28',
-  inactiveAirlines: '#FF4D4D',
+  inactiveAirliness: '#FF4D4D',
 };
+
+interface filteredFlightsData {
+  totalFlights: number;
+  delayedFlights: number;
+  canceledFlights: number;
+}
 
 interface PieChartProps {
   value: string | number;
   label: string;
   data: { [key: string]: number | string };
+  filteredFlightsData?: filteredFlightsData
   legendType: string;
 }
 
@@ -43,9 +53,9 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
         break;
       case 'performance':
         legendItems = [
-          { label: 'On Time', value: data.onTime, color: LEGENDCOLORS.scheduled},
-          { label: 'Delayed', value: data.delayed, color: LEGENDCOLORS.delayed},
-          { label: 'Canceled', value: data.canceled, color: LEGENDCOLORS.canceled},
+          { label: 'Total', value: data.totalFlights, color: LEGENDCOLORS.scheduled},
+          { label: 'Delayed', value: data.delayedFlights, color: LEGENDCOLORS.delayed},
+          { label: 'onTime', value: data.onTimeFlights, color: LEGENDCOLORS.active},
         ];
         break;
       case 'totalAirlines':
