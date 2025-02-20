@@ -10,13 +10,13 @@ function FlightMetrics() {
           </div>
           <div className="flight-metric">
             <p>Flight Hours</p>
-            <h2>93,000</h2>
-            <span>-12,7% vs last month</span>
+            <h2>93,243</h2>
+            <span>-9% vs last month</span>
           </div>
           <div className="flight-metric">
             <p>Distance Flown</p>
             <h2>59,023</h2>
-            <span>+12,7% vs last month</span>
+            <span>+14,3% vs last month</span>
           </div>
         </div>
     )
