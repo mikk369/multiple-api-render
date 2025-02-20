@@ -28,8 +28,19 @@ function Home() {
 
   const getFilteredAircraftData = async (): Promise<void> => {
     try {
+      const cachedData = sessionStorage.getItem("filteredAircraftData");
+
+      if(cachedData) {
+        setFilteredAircraftData(JSON.parse(cachedData));
+        return;
+      }
+
       const response = await axios.get('http://localhost:8000/filteredAircraftData');
       setFilteredAircraftData(response.data)
+
+      //store data in sessionStorage
+      sessionStorage.setItem("filteredAircraftData", JSON.stringify(response.data));
+
     } catch (error) {
       console.log(error);
     }
@@ -37,8 +48,19 @@ function Home() {
 
   const getFilteredFlightsData = async (): Promise<void> => {
     try {
+      const cachedData = sessionStorage.getItem("filteredFlightsData");
+
+      if(cachedData){
+        setFilteredFlightsData(JSON.parse(cachedData));
+        return;
+      }
+
       const response = await axios.get('http://localhost:8000/filteredFlights');
       setFilteredFlightsData(response.data)
+
+      //store data in sessionStorage
+      sessionStorage.setItem("filteredFlightsData", JSON.stringify(response.data));
+
     } catch (error) {
       console.log(error);
     }

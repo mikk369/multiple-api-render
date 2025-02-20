@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 const LEGENDCOLORS: { [key: string]: string } = {
   scheduled: '#0088FE',
   totalFlights: '#0088FE',
-  totalEmissions: '#0088FE',
+  totalEmission: '#0088FE',
   onTime: '#0088FE',
   totalAirlines: '#0088FE',
   performance: '#0088FE',
@@ -16,7 +16,7 @@ const LEGENDCOLORS: { [key: string]: string } = {
   delayedFlights: '#FF8042',
   canceled: '#FF4D4D',
   globalAnnualEmissions: '#FFBB28',
-  inactiveAirliness: '#FF4D4D',
+  inactiveAirlines: '#FF4D4D',
 };
 
 interface filteredFlightsData {
@@ -65,9 +65,9 @@ function PieChartComponent({ value, label, data, legendType }: PieChartProps) {
           { label: 'Inactive', value: data.inactiveAirlines, color: LEGENDCOLORS.canceled},
         ];
         break;
-      case 'airports':
+      case 'emission':
         legendItems = [
-          { label: 'Total', value: data.totalEmissions, color: LEGENDCOLORS.scheduled},
+          { label: 'Total', value: data.totalEmission, color: LEGENDCOLORS.scheduled},
           { label: 'Average', value: data.averageEmissionsPerFlight, color: LEGENDCOLORS.active},
           { label: 'Annual', value: data.globalAnnualEmissions, color: LEGENDCOLORS.landed},
         ];

@@ -1,5 +1,5 @@
 import PieChartComponent from './PieChartComponent';
-import { onTimePerformance, totalAirlines, airportsData } from './localData';
+import { totalAirlines, airportsData } from './localData';
 
 type FilteredAircraftData = {
   pagination: {
@@ -85,9 +85,9 @@ function FlightInfoGrid({ filteredAircraftData, filteredFlightsData }: FlightInf
               <h2>CO2 Emissions</h2>
             </div>
             <div className="chart-wrapper">
-              <PieChartComponent value={airportsData.totalAirports.toLocaleString()} label='Airports'
+              <PieChartComponent value={airportsData.totalEmission.toLocaleString()} label='Emission'
               data={airportsData}
-              legendType="airports"/>
+              legendType="emission"/>
             </div>
           </div>
         </div>
