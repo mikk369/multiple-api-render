@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Ensure the request is not for an existing file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect all other requests to server/index.php without showing it in the URL
+RewriteRule ^(.*)$ server/index.php/$1 [L,QSA]

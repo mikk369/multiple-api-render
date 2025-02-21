@@ -14,6 +14,9 @@ class Router {
         $uri = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
 
+        // Remove '/server/index.php' from the URI
+        $uri = str_replace('/server/index.php', '', $uri);
+
         $uri = parse_url($uri, PHP_URL_PATH);
 
         if(isset($this->routes[$method][$uri])) {
