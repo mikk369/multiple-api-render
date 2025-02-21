@@ -1,192 +1,80 @@
-function FlightDetails() {
+type FlightDetailsProps = {
+  airlineNames:  {
+    name: string[];
+  }
+}
+
+function FlightDetails ({airlineNames}: FlightDetailsProps) {
+  const firstTwenty = airlineNames.name.slice(0, 20)
+  const chunkSize = 5; // Each card needs 5 airlines
+  const groupedAirlines = [];
+
+for (let i = 0; i < firstTwenty.length; i += chunkSize) {
+  groupedAirlines.push(firstTwenty.slice(i, i + chunkSize));
+}
+
+// card headings 
+const cardHeadings: string[] = [
+  "Top Airports",
+  "Top tail Numbers",
+  "Top Models",
+  "Top Airlines"
+];
+
+const precentage:string[] = [
+  "5.5",
+  "2.6",
+  "4.7",
+  "2.2",
+  "1.5",
+  "2.5",
+  "3.6",
+  "5.7",
+  "7.8",
+  "8.2",
+  "1.1",
+  "3.9",
+  "6.3",
+  "2.6",
+  "5.8",
+  "4.9",
+  "3.3",
+  "4.7",
+  "2.5",
+  "3.5",
+  "8.5",
+]
+
     return (
-        <div className="flight-detail-grid">
-          <div className="flight-detail">
-            <div className="card-heading">
-              <h3>Top Airlines</h3>
-            </div>
-            <div className="card-sub-heading">
-              <p className='fourth-heading'>Airline</p>
-              <p className='fourth-heading'>% of Flights</p>
-            </div>
-            <ul className='list-items'>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>British Airays</p>
-                <span>3.5%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>easyJet</p>
-                <span>2.4%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>RyanAir</p>  
-                <span>1.3%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>Wizz Air</p>
-                <span>1.0%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>American</p>
-                <span>0.75%</span>
-              </li>
-            </ul>
+    <div className="flight-detail-grid">
+      {groupedAirlines.map((group, cardIndex) => (
+        <div className="flight-detail" key={cardIndex}>
+          <div className="card-heading">
+            <h3>{cardHeadings[cardIndex]}</h3>
           </div>
-          <div className="flight-detail">
-            <div className="card-heading">
-              <h3>Top Models</h3>
-            </div>
-            <div className="card-sub-heading">
-              <p className='fourth-heading'>Aircraft</p>
-              <p className='fourth-heading'>% of Flights</p>
-            </div>
-            <ul className='list-items'>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>British Airays</p>
-                <span>3.5%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>easyJet</p>
-                <span>2.4%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>RyanAir</p>  
-                <span>1.3%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>Wizz Air</p>
-                <span>1.0%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>American</p>
-                <span>0.75%</span>
-              </li>
-            </ul>
+          <div className="card-sub-heading">
+            <p className="fourth-heading">Airline</p>
+            <p className="fourth-heading">% of Flights</p>
           </div>
-          <div className="flight-detail">
-            <div className="card-heading">
-              <h3>Top tail Numbers</h3>
-            </div>
-            <div className="card-sub-heading">
-              <p className='fourth-heading'>Product</p>
-              <p className='fourth-heading'>Amount</p>
-            </div>
-            <ul className='list-items'>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>British Airays</p>
-                <span>3.5%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>easyJet</p>
-                <span>2.4%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>RyanAir</p>  
-                <span>1.3%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>Wizz Air</p>
-                <span>1.0%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>American</p>
-                <span>0.75%</span>
-              </li>
-            </ul>
-          </div>
-          <div className="flight-detail">
-            <div className="card-heading">
-              <h3>Top Airports</h3>
-            </div>
-            <div className="card-sub-heading">
-              <p className='fourth-heading'>Product</p>
-              <p className='fourth-heading'>Amount</p>
-            </div>
-            <ul className='list-items'>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>British Airays</p>
-                <span>3.5%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>easyJet</p>
-                <span>2.4%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>RyanAir</p>  
-                <span>1.3%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>Wizz Air</p>
-                <span>1.0%</span>
-              </li>
-              <li className='item'>
-                <div className='airline-logo'>
-                  <img src="./ryanlogo.jpg" alt="airline-logo" />
-                </div>
-                <p>American</p>
-                <span>0.75%</span>
-              </li>
-            </ul>
-          </div>
+          <ul className="list-items">
+            {group.length > 0 ? (
+              group.map((airline, index) => (
+                <li key={index} className="item">
+                  <div className="airline-logo">
+                    <img src="./webcodesLogo.jpg" alt="airline-logo" />
+                  </div>
+                  <p>{airline}</p>
+                  <span>{precentage[index]}%</span>
+                </li>
+              ))
+            ) : (
+              <p className="api-message">API requests are full</p>
+            )}
+          </ul>
         </div>
-    )
+      ))}
+    </div>
+  )
 }
 
 export default FlightDetails;

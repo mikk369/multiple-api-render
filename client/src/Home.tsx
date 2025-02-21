@@ -5,6 +5,8 @@ import RevenueChart from './RevenueChart';
 import FlightInfoGrid from './FlightInfoGrid';
 import FlightMetrics from './FlightMetrics';
 import FlightDetails from './FlightDetails';
+import { FlightApiResponse} from "./types"; //"FlightData" lisada kui teha flightDetails aktiiveks
+// import config from './config';
 import axios from 'axios';
 
 type filteredAircraftData = {
@@ -23,9 +25,33 @@ type filteredFlightsData = {
   onTimeFlights: number
 }
 
+type airlineNames = {
+  name: string[]
+}
+
 function Home() {
   const [filteredAircraftData, setFilteredAircraftData] = useState<filteredAircraftData | null>(null);
   const [filteredFlightsData, setFilteredFlightsData] = useState<filteredFlightsData | null>(null);
+  const [flightData, setFlightData] = useState<FlightApiResponse | null>(null);
+  const [airlineNames, setAirlineNames] = useState<airlineNames>({ name: [] });
+
+  const getFlightData = async () => {
+    try {
+      const cachedData = sessionStorage.getItem("flightData");
+      
+      if(cachedData) {
+        setFlightData(JSON.parse(cachedData));
+        return;
+      }
+      const response = await axios.get('https://multyapi.webcodes.ee/flights');
+      setFlightData(response.data);
+
+      //store data in sessionStorage
+      sessionStorage.setItem("flightData", JSON.stringify(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const getFilteredAircraftData = async (): Promise<void> => {
     try {
@@ -36,7 +62,7 @@ function Home() {
         return;
       }
 
-      const response = await axios.get('http://localhost:8000/filteredAircraftData');
+      const response = await axios.get('https://multyapi.webcodes.ee/filteredAircraftData');
       setFilteredAircraftData(response.data)
 
       //store data in sessionStorage
@@ -56,7 +82,7 @@ function Home() {
         return;
       }
 
-      const response = await axios.get('http://localhost:8000/filteredFlights');
+      const response = await axios.get('https://multyapi.webcodes.ee/filteredFlights');
       setFilteredFlightsData(response.data)
 
       //store data in sessionStorage
@@ -68,9 +94,19 @@ function Home() {
   }
 
   useEffect(() => {
+    getFlightData()
     getFilteredAircraftData();
     getFilteredFlightsData();
   }, []);
+
+  useEffect(() => {
+    if(!flightData) return;
+
+    const airlineNameArray = flightData.data.map((flight: any) => flight.airline?.name);
+    setAirlineNames({name: airlineNameArray});
+
+    sessionStorage.setItem("airlineNames", JSON.stringify({name: airlineNameArray}));
+  }, [flightData])
 
   return (
     <>
@@ -88,11 +124,10 @@ function Home() {
         <p>Live flights data.</p>
         <p>Weather conditions.</p>
         <p>City info & time zones.</p>
-        <p>Flights map.</p>
       </div>
     </div>
       <div className="flights-section">
-        {filteredAircraftData && filteredFlightsData ? (
+        {filteredAircraftData && flightData && filteredFlightsData ? (
 
           <FlightInfoGrid
           filteredAircraftData={filteredAircraftData}
@@ -103,7 +138,8 @@ function Home() {
         )}
         <p className='fourth-heading'>metrics</p>
         <FlightMetrics />
-        <FlightDetails />
+        <FlightDetails 
+        airlineNames={airlineNames} />
         <p className='fourth-heading'>revenue</p>
         <div className="section-revenue">
           <div className="flight-hours">

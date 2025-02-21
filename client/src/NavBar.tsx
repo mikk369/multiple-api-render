@@ -34,9 +34,8 @@ function NavBar() {
                 <li>
                   <Link className="nav-links" to="/">Home</Link>
                 </li>
-                <li className="nav-links">
-                  <a href="#flight-info-grid">Flight Info</a>
-                </li>
+                <li className="nav-links">Weather</li>
+                <li className="nav-links">Flight Info</li>
                 <li className="nav-links">Airlines</li>
                 <li className="nav-links">Flight</li>
               </ul>
